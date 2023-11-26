@@ -6,7 +6,7 @@ import 'package:lottie/lottie.dart';
 
 import 'Verify_Otp.dart';
 
-var globalphone = "";
+  var globalphone = "";
 class OtpLogin extends StatefulWidget {
   const OtpLogin({Key? key}) : super(key: key);
 
@@ -17,6 +17,26 @@ class OtpLogin extends StatefulWidget {
 }
 
 class _OtpLoginState extends State<OtpLogin> {
+  bool _isLoading = false;
+
+  void _startLoading() {
+    setState(() {
+      _isLoading = true;
+    });
+
+    // Simulate a time-consuming task
+    Future.delayed(Duration(seconds: 30), () {
+      setState(() {
+        _isLoading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('please try again or \nYour Number Is blocked By Firebase\ntry again tomorrow'),
+          duration: Duration(seconds: 5),
+        ),
+      );
+    });
+  }
 
   TextEditingController phoneController = TextEditingController();
 String phone = "";
@@ -119,6 +139,7 @@ void dispose() {
                   ),
                 ),
               ),
+
               SizedBox(height: 50,),
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -132,6 +153,7 @@ void dispose() {
                         )
                     ),
                     onPressed: () async {
+                      _startLoading();
                       _startTimer();
                       await FirebaseAuth.instance.verifyPhoneNumber(
                         phoneNumber: '${CountryCode.toString()+phone}',
@@ -149,6 +171,12 @@ void dispose() {
                     ),),
                   ),
                 ),
+              ),
+              SizedBox(height: 50,),
+              Container(
+                  child: _isLoading
+                      ? CircularProgressIndicator()
+                      : Text("")
               ),
             ],
           ),
