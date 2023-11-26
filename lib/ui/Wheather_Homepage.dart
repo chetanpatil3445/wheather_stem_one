@@ -46,7 +46,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   void initState() {
     super.initState();
-  //   fetchData();
+      fetchData();
   }
 
   Future<void> fetchData() async {
