@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pin_input_text_field/pin_input_text_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../ui/Wheather_Homepage.dart';
 import 'Phone_Otp.dart';
@@ -113,6 +114,7 @@ class _OTPVERIFYState extends State<OTPVERIFY> {
                              PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: OtpLogin.verify, smsCode: code);
                              // Sign the user in (or link) with the credential
                              await auth.signInWithCredential(credential);
+                             await storeMobileNumber(globalphone);
                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> WeatherScreen()));
                            }
                            catch(e){
@@ -169,5 +171,8 @@ class _OTPVERIFYState extends State<OTPVERIFY> {
       );
 
   }
-
+  Future<void> storeMobileNumber(String mobileNumber) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('globalphone', mobileNumber);
+  }
   }

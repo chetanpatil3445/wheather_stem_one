@@ -1,13 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
-
-import '../models/city.dart';
-import '../models/constants.dart';
+ import '../models/constants.dart';
 import '../widgets/weather_item.dart';
-
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,8 +12,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   Constants myConstants = Constants();
 
-  //initiatilization
-  int temperature = 0;
+   int temperature = 0;
   int maxTemp = 0;
   String weatherStateName = 'Loading..';
   int humidity = 0;
@@ -29,76 +21,14 @@ class _HomeState extends State<Home> {
   var currentDate = 'Loading..';
   String imageUrl = '';
   int woeid =
-      44418; //This is the Where on Earth Id for London which is our default city
+      44418;
   String location = 'London'; //Our default city
-
-  //get the cities and selected cities data
-  //var selectedCities = City.getSelectedCities();
   List<String> cities = [
     'London'
-  ]; //the list to hold our selected cities. Deafult is London
-
-  List consolidatedWeatherList = []; //To hold our weather data after api call
-
-  //Api calls url
-  String searchLocationUrl =
-      'https://www.metaweather.com/api/location/search/?query='; //To get the woeid
-  String searchWeatherUrl =
-      'https://www.metaweather.com/api/location/'; //to get weather details using the woeid
-
-  //Get the Where on earth id
-  void fetchLocation(String location) async {
-    var searchResult = await http.get(Uri.parse(searchLocationUrl + location));
-    var result = json.decode(searchResult.body)[0];
-    setState(() {
-      woeid = result['woeid'];
-    });
-  }
-
-  void fetchWeatherData() async {
-    var weatherResult =
-        await http.get(Uri.parse(searchWeatherUrl + woeid.toString()));
-    var result = json.decode(weatherResult.body);
-    var consolidatedWeather = result['consolidated_weather'];
-
-    setState(() {
-      for (int i = 0; i < 7; i++) {
-        consolidatedWeather.add(consolidatedWeather[
-            i]); //this takes the consolidated weather for the next six days for the location searched
-      }
-      //The index 0 referes to the first entry which is the current day. The next day will be index 1, second day index 2 etc...
-      temperature = consolidatedWeather[0]['the_temp'].round();
-      weatherStateName = consolidatedWeather[0]['weather_state_name'];
-      humidity = consolidatedWeather[0]['humidity'].round();
-      windSpeed = consolidatedWeather[0]['wind_speed'].round();
-      maxTemp = consolidatedWeather[0]['max_temp'].round();
-
-      //date formatting
-      var myDate = DateTime.parse(consolidatedWeather[0]['applicable_date']);
-      currentDate = DateFormat('EEEE, d MMMM').format(myDate);
-
-      //set the image url
-      imageUrl = weatherStateName
-          .replaceAll(' ', '')
-          .toLowerCase(); //remove any spaces in the weather state name
-      //and change to lowercase because that is how we have named our images.
-
-      consolidatedWeatherList = consolidatedWeather
-          .toSet()
-          .toList(); //Remove any instances of dublicates from our
-      //consolidated weather LIST
-    });
-  }
+  ];
 
   @override
   void initState() {
-    fetchLocation(cities[0]);
-    fetchWeatherData();
-
-    //For all the selected cities from our City model, extract the city and add it to our original cities list
-    // for (int i = 0; i < selectedCities.length; i++) {
-    //   cities.add(selectedCities[i].city);
-    // }
     super.initState();
   }
 
