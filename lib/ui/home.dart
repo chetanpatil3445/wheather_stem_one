@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
   String location = 'London'; //Our default city
 
   //get the cities and selected cities data
-  var selectedCities = City.getSelectedCities();
+  //var selectedCities = City.getSelectedCities();
   List<String> cities = [
     'London'
   ]; //the list to hold our selected cities. Deafult is London
@@ -96,9 +96,9 @@ class _HomeState extends State<Home> {
     fetchWeatherData();
 
     //For all the selected cities from our City model, extract the city and add it to our original cities list
-    for (int i = 0; i < selectedCities.length; i++) {
-      cities.add(selectedCities[i].city);
-    }
+    // for (int i = 0; i < selectedCities.length; i++) {
+    //   cities.add(selectedCities[i].city);
+    // }
     super.initState();
   }
 

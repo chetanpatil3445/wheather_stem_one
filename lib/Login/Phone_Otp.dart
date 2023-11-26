@@ -108,59 +108,56 @@ void dispose() {
                     decoration: InputDecoration(
                       enabledBorder: InputBorder.none,
                       focusedBorder: InputBorder.none,
-                      hintText: "enter here"
+                      hintText: "Enter Number"
                     ),
                   ),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30.0 , right: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    '$_counter sec',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.red,
-                      fontWeight:FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 30.0 , right: 15),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.end,
+            //     children: [
+            //       Text(
+            //         '$_counter sec',
+            //         style: TextStyle(
+            //           fontSize: 20,
+            //           color: Colors.red,
+            //           fontWeight:FontWeight.bold,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             SizedBox(height: 50,),
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Expanded(
-                flex: 2,
-                child: Container(
-                  height: 60,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                          Color.fromARGB(176, 27, 7, 173),
-                        )
-                    ),
-                    onPressed: () async {
-                      _startTimer();
-                      await FirebaseAuth.instance.verifyPhoneNumber(
-                        phoneNumber: '${CountryCode.toString()+phone}',
-                        verificationCompleted: (PhoneAuthCredential credential) {},
-                        verificationFailed: (FirebaseAuthException e) {},
-                        codeSent: (String verificationId, int? resendToken) {
-                          OtpLogin.verify=verificationId;
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>   OTPVERIFY()));
-                        },
-                        codeAutoRetrievalTimeout: (String verificationId) {},
-                      );
-                    },
-                    child: Text("Continue", style: TextStyle(
-                      fontSize: 25
-                    ),),
+              child: Container(
+                height: 60,
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(
+                        Color.fromARGB(176, 27, 7, 173),
+                      )
                   ),
+                  onPressed: () async {
+                    _startTimer();
+                    await FirebaseAuth.instance.verifyPhoneNumber(
+                      phoneNumber: '${CountryCode.toString()+phone}',
+                      verificationCompleted: (PhoneAuthCredential credential) {},
+                      verificationFailed: (FirebaseAuthException e) {},
+                      codeSent: (String verificationId, int? resendToken) {
+                        OtpLogin.verify=verificationId;
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>   OTPVERIFY()));
+                      },
+                      codeAutoRetrievalTimeout: (String verificationId) {},
+                    );
+                  },
+                  child: Text("Continue", style: TextStyle(
+                    fontSize: 25
+                  ),),
                 ),
               ),
             ),

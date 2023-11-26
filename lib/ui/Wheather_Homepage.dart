@@ -151,7 +151,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   void initState() {
     super.initState();
-     //fetchData();
+     fetchData();
   }
 
   Future<void> fetchData() async {
@@ -255,7 +255,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 setState(() {
                   selectedCity = newValue!;
                 });
-               // fetchData();
+                fetchData();
               },
               items: cities.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
