@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "2949728885",
-    "project_id": "wheather-fa589",
-    "storage_bucket": "wheather-fa589.appspot.com"
+    "project_number": "168638526470",
+    "project_id": "wheatherss",
+    "storage_bucket": "wheatherss.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:2949728885:android:e83b12df6390f0d6d4863c",
+        "mobilesdk_app_id": "1:168638526470:android:4731c554135a298cff3f87",
         "android_client_info": {
           "package_name": "com.example.wheather_stem_one"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAX1428FCuQlYPcslYvOYpc26yhrfoewDM"
+          "current_key": "AIzaSyDl6Cl-RUpPXbWlIvPi4aqF1KxOtW1Oe-U"
         }
       ],
       "services": {

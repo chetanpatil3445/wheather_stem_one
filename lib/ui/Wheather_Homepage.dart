@@ -29,13 +29,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
   String selectedCity = 'mumbai'; // Updated default value for dropdown
   List<String> cities = [
     'mumbai',
-    'pune',
     'delhi',
-    'surat',
     'banglore',
     'New York',
     'San Francisco',
-    'Dhule',
     'Nashik',
     'Miami',
     'Dubai',
@@ -51,10 +48,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
 
   Future<void> fetchData() async {
     final apiUrl = 'https://forecast9.p.rapidapi.com/rapidapi/forecast/$selectedCity/summary/';
-   // final apiKey = 'cc88c8f592msh77b61539047165cp165c49jsn66a89c5c5b96';
-  //  final apiKey = 'f8da56d13cmshb1e398f13f9d910p160936jsne13a477ff040';
-  //   final apiKey = '5790644d63msh7847404a1288f43p17075cjsnf87ab411dbf4';
-     final apiKey = 'ddeba66a1cmshe8f6faffab148aep15176bjsn41ff06ee894e';
+    // final apiKey = 'cc88c8f592msh77b61539047165cp165c49jsn66a89c5c5b96';
+       final apiKey = 'f8da56d13cmshb1e398f13f9d910p160936jsne13a477ff040';
+    //   final apiKey = '5790644d63msh7847404a1288f43p17075cjsnf87ab411dbf4';
+   //  final apiKey = 'ddeba66a1cmshe8f6faffab148aep15176bjsn41ff06ee894e';
     try {
       final response = await http.get(
         Uri.parse(apiUrl),
